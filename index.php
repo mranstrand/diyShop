@@ -6,7 +6,7 @@
 
 <body>
 <a href="produktlista.php">Produkter</a>
-<a href="inloggning/loginform.php">Logga in</a>
+<a href="inloggning/login_form.php">Logga in</a>
 </body>
 
 </html>

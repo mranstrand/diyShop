@@ -9,7 +9,7 @@
 
 //Variabler för databaskoppling
 $dbhost     = "localhost";
-$dbname     = "webbshop";
+$dbname     = "diyShop";
 $dbuser     = "root";
 $dbpass     = "";
 
@@ -41,10 +41,11 @@ $arr = $STH->fetchAll();
 <?php
 foreach($arr as $value){
 
-    echo "<a href='produkt.php?productId=" . $value["produktid"] . "'>" . $value["produktnamn"] . "</a><br>";
+    echo "<a href='produkt.php?id=" . $value["id"] . "'>" . $value["titel"] . "</a><br>";
 
 }
 ?>
 
+<a href="ny_produkt_form.php">Lägg till ny produkt. </a>
 </body>
 </html>

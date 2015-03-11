@@ -18,15 +18,15 @@ $DBH = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 $DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
 // Förbered databasfråga med placeholders (markerade med : i början)
-$STH = $DBH->prepare("INSERT INTO tbl_produkter(id, titel, beskrivning, pris, bildfil, lagersaldo) VALUES (:id, :titel, :beskrivning, :pris, :bildfil, :lagersaldo)");
+$STH = $DBH->prepare("INSERT INTO tbl_produkter(titel, beskrivning, pris, bildfil, lagersaldo) VALUES (:titel, :beskrivning, :pris, :bildfil, :lagersaldo)");
 
 //Ersätt placeholders med värden från variabler
 
-$STH->bindParam(':id', $_POST["id"]);
-$STH->bindParam(':img', $img);
-$STH->bindParam(':description', $descrip);
-$STH->bindParam(':price', $price);
-$STH->bindParam(':status', $status);
+$STH->bindParam(':titel', $_POST["titel"]);
+$STH->bindParam(':beskrivning', $_POST["beskrivning"]);
+$STH->bindParam(':pris', $_POST["pris"]);
+$STH->bindParam(':bildfil', $_POST["bild"]);
+$STH->bindParam(':lagersaldo', $_POST["lagersaldo"]);
 
 //Utför frågan
 $STH->execute();
@@ -34,8 +34,7 @@ $STH->execute();
 //Stänger databaskopplingen
 $DBH = null;
 
-//header("Location: productList.php");
-
 ?>
 
 
+<a href="produktlista.php">Tillbaka till produktlistan</a>

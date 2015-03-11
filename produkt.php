@@ -6,12 +6,9 @@
  *
  */
 
-//Ta emot id för den produkt som skall visas
-$productID = $_GET["productId"];
-
 //Variabler för databaskoppling
 $dbhost     = "localhost";
-$dbname     = "webbshop";
+$dbname     = "diyShop";
 $dbuser     = "root";
 $dbpass     = "";
 
@@ -22,10 +19,10 @@ $DBH = new PDO("mysql:host=$dbhost;dbname=$dbname", $dbuser, $dbpass);
 $DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 
 // Förbered databasfråga med placeholders (markerade med : i början)
-$STH = $DBH->prepare("SELECT * FROM tbl_produkter WHERE produktid = :id");
+$STH = $DBH->prepare("SELECT * FROM tbl_produkter WHERE id = :id");
 
 //Ersätt placeholders med värden från variabler
-$STH->bindParam(':id', $productID);
+$STH->bindParam(':id', $_GET["id"]);
 
 //Utför frågan
 $STH->execute();
@@ -36,13 +33,6 @@ $DBH = null;
 //Undersök om nåfon användare matchar frågan
 $row = $STH->fetch();
 
-    $productName = $row["produktnamn"];
-    $productPrice = $row["pris"];
-    $productImg = $row["bildlank"];
-    $productDescription = $row["beskrivning"];
-
-
-
 ?>
 
 <html>
@@ -50,17 +40,20 @@ $row = $STH->fetch();
     <meta charset="UTF-8"/>
 </head>
 <body>
-<h1><?php echo $productName; ?></h1>
+<h1><?php echo $row["titel"]; ?></h1>
 <br/>
-<img src="<?php echo $productImg; ?>" /> <br/>
-<h2>Pris: <?php echo $productPrice; ?> kr</h2>
-<?php echo $productDescription; ?>
+<img src="<?php echo $row["bildfil"]; ?>" /> <br/>
+<h2>Pris: <?php echo $row["pris"]; ?> kr</h2>
+<?php echo $row["beskrivning"]; ?>
+<p>I lager: <?php echo $row["lagersaldo"] ?></p>
 
-<form action="laggIKorg.php?productId=<?php echo $productID ?>" method="post">
 
-    <input type="text" name="antal">
+<form action="lagg_i_korg.php?productId=<?php echo $productID ?>" method="post">
+
+    Köp antal: <input type="text" name="antal">
     <input type="submit">
 
 </form>
+<a href="produktlista.php">Tillbaka till listan</a>
 </body>
 </html>

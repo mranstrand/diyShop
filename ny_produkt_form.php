@@ -21,11 +21,13 @@
 
 <body>
     <h1>Registrera produkt</h1>
-    <form action="nyprodukt.php" method="post"><br>
-       Pris: <input type="text" name="titel"><br>
-       Bildlänk: <input type="text" name="prodImg"><br>
-       Lagerstatus: <input type="text" name="prodStatus"><br>
-        Beskrivning: <input type="text" name="prodDescrip"><br>
+    <form action="ny_produkt.php" method="post"><br>
+        Titel: <input type="text" name="titel"><br>
+        Beskrivning: <input type="text" name="beskrivning"><br>
+        Pris: <input type="text" name="pris"><br>
+        Sökväg till bildfil: <input type="text" name="bild"><br>
+        Lagersaldo: <input type="text" name="lagersaldo"><br>
+
         <input type="submit">
 
     </form>
