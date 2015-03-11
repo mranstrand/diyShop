@@ -22,7 +22,7 @@ $DBH->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING );
 $STH = $DBH->prepare("SELECT * FROM tbl_produkter WHERE id = :id");
 
 //Ersätt placeholders med värden från variabler
-$STH->bindParam(':id', $_GET["id"]);
+$STH->bindParam(':id', $_GET["produkt_id"]);
 
 //Utför frågan
 $STH->execute();
@@ -48,7 +48,7 @@ $row = $STH->fetch();
 <p>I lager: <?php echo $row["lagersaldo"] ?></p>
 
 
-<form action="lagg_i_korg.php?productId=<?php echo $productID ?>" method="post">
+<form action="../varukorg/lagg_i_korg.php?produkt_id=<?php echo $_GET["produkt_id"]. "&produkt_titel=" .$row["titel"]  ?>" method="post">
 
     Köp antal: <input type="text" name="antal">
     <input type="submit">

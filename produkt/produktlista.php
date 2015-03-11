@@ -41,7 +41,7 @@ $arr = $STH->fetchAll();
 <?php
 foreach($arr as $value){
 
-    echo "<a href='produkt.php?id=" . $value["id"] . "'>" . $value["titel"] . "</a><br>";
+    echo "<a href='produkt.php?produkt_id=" . $value["id"] . "'>" . $value["titel"] . "</a><br>";
 
 }
 ?>

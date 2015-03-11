@@ -36,3 +36,5 @@ $STH->execute();
 //Stänger databaskopplingen
 $DBH = null;
 ?>
+
+<a href="login_form.php">Logga in</a>

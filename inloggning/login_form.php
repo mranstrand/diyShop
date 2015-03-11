@@ -15,6 +15,6 @@
         Lösenord: <input type="password" name="pass" /><br/>
         <input type="submit" value="Submit">
     </form>
-<a href="regform.php">Registrera dig</a>
+<a href="reg_form.php">Registrera dig</a>
 </body>
 </html>
