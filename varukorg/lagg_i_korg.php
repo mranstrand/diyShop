@@ -8,6 +8,22 @@ session_start();
 
 $_SESSION["cart"][] = array("produkt_id" => $_GET["produkt_id"], "antal" => $_POST["antal"]);
 
+include "../db/connect.php";
+
+// Förbered databasfråga med placeholders (markerade med : i början)
+$STH = $DBH->prepare("INSERT INTO tbl_orderrader(titel, beskrivning, pris, bildfil, lagersaldo) VALUES (:titel, :beskrivning, :pris, :bildfil, :lagersaldo)");
+
+//Ersätt placeholders med värden från variabler
+
+$STH->bindParam(':titel', $_POST["titel"]);
+$STH->bindParam(':beskrivning', $_POST["beskrivning"]);
+$STH->bindParam(':pris', $_POST["pris"]);
+$STH->bindParam(':bildfil', $_POST["bild"]);
+$STH->bindParam(':lagersaldo', $_POST["lagersaldo"]);
+
+//Utför frågan
+$STH->execute();
+
 ?>
 
 <html>

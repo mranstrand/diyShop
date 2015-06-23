@@ -27,9 +27,28 @@ if($row = $STH->fetch()){
     $_SESSION["kund"]["enamn"] = $row["efternamn"];
     $_SESSION["kund"]["id"] = $row["id"];
     print_r($_SESSION);
-    //header("Location: index.php");
+    
+    // Skapar ny order
+    $STH = $DBH->prepare("INSERT INTO tbl_order (kundID, status, regdat) value (:kundID, :status, CURRENT_DATE())");
+    $status = "varukorg";
+    //Ersätt placeholders med värden från variabler
+    $STH->bindParam(':kundID', $_SESSION["kundid"]);
+    $STH->bindParam(':status', $status);
+    //Utför frågan
+    $STH->execute();
+    
+    //Förbereder ny fråga
+    $STH = $DBH->prepare("SELECT LAST_INSERT_ID()");
+    
+    //Utför frågan
+    $STH->execute();
+    
+    //Hämdar orderid
+    $result = $STH->fetch();
+    $_SESSION["orderID"] = $result[0];
+//header("Location: index.php");
 }else{
-    echo "Fail!";
+    echo "Fel!";
 
 }
 
